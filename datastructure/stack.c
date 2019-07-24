@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "stack.h"
 
-Stack create_stack(int size)
+Stack stack_init(int size)
 {
     Stack stack;
     stack.top = -1;
@@ -13,39 +13,41 @@ Stack create_stack(int size)
 
     return stack;
 }
-int stack_is_empty(Stack* s)
+
+int stack_empty(Stack* s)
 {
-    return (s -> top == -1);
+    return (s -> top < 0);
 }
 
-void stack_push(Stack* s, char item)
+int stack_push(Stack* s, char item)
 {
-    int top = s -> top;
-
-    *(s -> data + top + 1) = item;
-
-    s -> top = top + 1;
+    if (s -> top + 1 > s -> size) return -1;
+    else {
+        s -> data[++s -> top] = item;
+        return 1;
+    }
 }
 
-char stack_pop(Stack* s)
+int stack_pop(Stack* s)
 {
-    int top = s -> top;
-    char val = *((s -> data) + top);
-    *((s -> data) + top) = '\0';
-    s -> top = top - 1;
-
-    return val;
+    if(s -> top < 0) return -1;
+    else {
+        s -> data[s -> top--] = '\0';
+        return 1;
+    }
 }
 
-char stack_peek(Stack* s)
+char stack_top(Stack* s)
 {
-    int top = s -> top;
-    char val = *(s -> data + top);
-
-    return val;
+    return s -> data[s -> top];
 }
 
-void delete_stack(Stack* s)
+void stack_delete(Stack* s)
 {
     free(s -> data);
+}
+
+int stack_size(Stack* s)
+{
+    return s -> top + 1;
 }

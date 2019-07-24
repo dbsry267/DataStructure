@@ -13,11 +13,12 @@ struct stack{
 
 typedef struct stack Stack;
 
-extern Stack create_stack(int size);
-extern int stack_is_empty(Stack* s);
-extern void stack_push(Stack* s, char item);
-extern char stack_pop(Stack* s);
-extern char stack_peek(Stack* s);
-extern void delete_stack(Stack* s);
+extern Stack stack_init(int size);
+extern int stack_empty(Stack* s);
+extern int stack_push(Stack* s, char item);
+extern int stack_pop(Stack* s);
+extern char stack_top(Stack* s);
+extern void stack_delete(Stack* s);
+extern int stack_size(Stack* s);
 
 #endif //DATASTRUCTURE_STACK_H

@@ -3,8 +3,14 @@
 //
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "queue.h"
 
+void error(char *message)
+{
+    fprintf(stderr, "%s\n", message);
+    exit(1);
+}
 
 Queue queue_create(int size)
 {
@@ -32,9 +38,8 @@ int queue_size(Queue* q)
 
 int queue_push(Queue* q, char data)
 {
-    if (q->size == q->maxSize) {
-        return -1;
-    } else {
+    if (queue_full(q)) error("Queue is full");
+    else {
         q->data[++q->size] = data;
         return 1;
     }
@@ -42,9 +47,8 @@ int queue_push(Queue* q, char data)
 
 int queue_pop(Queue* q)
 {
-    if (q->size < 1 || q->maxSize < 1) {
-        return -1;
-    } else {
+    if (queue_empty(q)) error("Queue is empty");
+    else {
         memmove(q->data, q->data + 1, q->size--);
         return 1;
     }
@@ -52,18 +56,18 @@ int queue_pop(Queue* q)
 
 char queue_front(Queue* q)
 {
-    if (q->size < 0 || q->maxSize < 1) {
-        return '\0';
-    } else {
+
+    if (queue_empty(q)) error("Queue is empty");
+    else {
         return *(q->data);
     }
 }
 
 char queue_back(Queue* q)
 {
-    if (q->size < 0 || q->maxSize < 1) {
-        return '\0';
-    } else {
+
+    if (queue_empty(q)) error("Queue is empty");
+    else {
         return *(q->data + q->size);
     }
 }

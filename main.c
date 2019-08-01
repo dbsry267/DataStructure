@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include "datastructure/stack.h"
 #include "datastructure/queue.h"
+#include "datastructure/circularqueue.h"
+#include "datastructure/deque.h"
 
 void stackTest();
 void queueTest();
+void circularqueueTest();
+void dequeTest();
 
 int main() {
-    queueTest();
+    dequeTest();
     return 0;
 }
 
@@ -50,4 +54,38 @@ void queueTest()
     printf("%d\n", queue_empty(&q));
 
     queue_delete(&q);
+}
+
+void circularqueueTest()
+{
+    CircularQueue cq = circularqueue_create(8);
+    circularqueue_push(&cq, 'A');
+    circularqueue_push(&cq, 'B');
+    circularqueue_front(&cq);
+    circularqueue_back(&cq);
+    circularqueue_push(&cq, 'C');
+    circularqueue_pop(&cq);
+    circularqueue_front(&cq);
+    circularqueue_push(&cq, 'D');
+    circularqueue_back(&cq);
+    circularqueue_push(&cq, 'E');
+    circularqueue_pop(&cq);
+    circularqueue_front(&cq);
+    circularqueue_push(&cq, 'F');
+    circularqueue_back(&cq);
+    circularqueue_push(&cq, 'G');
+    circularqueue_pop(&cq);
+    circularqueue_front(&cq);
+    circularqueue_push(&cq, 'H');
+    circularqueue_pop(&cq);
+    circularqueue_front(&cq);
+
+    circularqueue_delete(&cq);
+}
+
+void dequeTest()
+{
+    Deque dq = deque_create(8);
+    
+    deque_delete(&dq);
 }

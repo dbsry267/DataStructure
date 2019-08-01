@@ -5,13 +5,11 @@
 #ifndef DATASTRUCTURE_QUEUE_H
 #define DATASTRUCTURE_QUEUE_H
 
-struct queue{
+typedef struct queue{
     int maxSize;
     int size;
     char* data;
-};
-
-typedef struct queue Queue;
+} Queue;
 
 extern Queue queue_create(int maxSize);
 extern int queue_empty(Queue* q);

@@ -5,19 +5,19 @@
 #ifndef DATASTRUCTURE_STACK_H
 #define DATASTRUCTURE_STACK_H
 
-struct stack{
+typedef struct stack{
     int size;
     int top;
     char *data;
-};
-
-typedef struct stack Stack;
+} Stack;
 
 // 스택을 생성하는 함수
 extern Stack stack_init(int size);
 
 // 스택이 비었는지 여부를 0과 1로 반환
 extern int stack_empty(Stack* s);
+
+extern int stack_full(Stack* s);
 
 // 스택에 새로운 값을 추가
 extern int stack_push(Stack* s, char item);
